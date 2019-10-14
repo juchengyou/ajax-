@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/index.css" />
+	</head>
+	<body>
+		<div class="wrap flex_colume">
+			<div class="content flex_colume">
+				<a href="http://mp.weixin.qq.com/s/hSt0RNGR23KetTFLoYP7dQ" class="items flex_row">
+					<div class="img">
+						<img src="http://www.tanzhouphp.com/tanzhoue/images/newsList/1.jpg" alt="" />
+					</div>
+					<div class="bd">
+						<p class="label">00000</p>
+					</div>
+					<div class="ft">&gt;</div>
+				</a>
+				<a href="#" class="items flex_row">
+					<div class="img">
+						<img src="http://www.tanzhouphp.com/tanzhoue/images/newsList/1.jpg" alt="" />
+					</div>
+					<div class="bd">
+						<p class="label">11111</p>
+					</div>
+					<div class="ft">&gt;</div>
+				</a>
+			</div>
+			<div class="page">
+				<ul class="flex_row">
+					<li>1</li>
+					<li>2</li>
+					<li>3</li>
+					<li>4</li>
+					<li>5</li>
+					<li>6</li>
+				</ul>
+			</div>
+		</div>
+				
+		
+		<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />		
+		
+		<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			getData();
+			var goTo=cacheData();
+			function getData(page){
+				var page=page||1;
+				var url='http://test.wulv5.com/api/v1_0/movie';
+				myAjax({
+					url:url,
+					data:{
+						page:page,
+						limit:5
+					},
+					success:function(doc){
+						var data=JSON.parse(doc);
+//						console.log(data);
+						goTo.set(page,doc);
+					}
+				});
+			};
+			var oLi=document.querySelectorAll(".flex_row li");
+			var oUl=document.querySelector(".flex_row");
+			oUl.addEventListener("click",function(e){
+				var e=e||window.event;
+				if(e.target.tagName.toLowerCase()==="li"){
+					goTo.get(e.target.innerHTML);
+				}
+			});
+				
+			
+//			oLi.forEach(function(el,index){
+//				
+//				el.onclick=function(){
+////					getData(index);
+////					console.log("123")
+//				goTo.get(this.index);
+//					 
+//				}
+//				
+//			});
+			
+			function cacheData(){
+				var cache={};
+				return {
+					set:function(page,data){
+						cache[page]=data;
+					},
+					get:function(page){
+//						console.log(cache[page]);
+						return cache[page];
+					}
+				}
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+		</script>
+	</body>
+</html>
